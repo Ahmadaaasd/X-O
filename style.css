@@ -1,0 +1,133 @@
+body{
+  margin: 0;
+  padding: 0;
+  background-color: cadetblue;
+}
+:root{
+  --cell-size: 100px;
+  --Mark: calc(var(--cell-size) * 0.9)
+}
+.board{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+.cell{
+  position: relative;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color:cadetblue;
+  border: 3px solid rgb(0, 174, 255);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  cursor: pointer;
+}
+.cell:first-child,.cell:nth-child(2),.cell:nth-child(3){
+  border-top: none;
+}
+.cell:nth-child(3n + 1){
+  border-left: none;
+}
+.cell:nth-child(3n + 3){
+  border-right: none;
+}
+.cell:last-child,.cell:nth-child(7),.cell:nth-child(8){
+  border-bottom: none;
+}
+/* X design*/
+.cell.x::before,
+.cell.x::after{
+  background-color: rgb(13, 45, 100);
+  content: "";
+  position: absolute;
+  width: calc(var(--Mark)*0.15);
+  height: var(--Mark);
+}
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after{
+  content: "";
+  position: absolute;
+  width: calc(var(--Mark)*0.15);
+  height: var(--Mark);
+  background-color: rgb(0, 174, 255);
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before{
+  transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after{
+  transform: rotate(-45deg);
+}
+/* end of X design*/
+/* O design*/
+.cell.o::before,.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after{
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.cell.o::before{
+  width: var(--Mark);
+  height: var(--Mark);
+  background-color: rgb(13, 45, 100);
+}
+.board.o .cell:not(.x):not(.o):hover::before{
+  width: var(--Mark);
+  height: var(--Mark);
+  background-color: rgb(0, 174, 255);
+}
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after{
+  width: calc(var(--Mark)* .7);
+  height: calc(var(--Mark)* .7);
+  background-color: cadetblue;
+}
+.cell.o, .cell.x{
+  cursor: not-allowed;
+}
+/* end of O design*/
+.pop-up{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+}
+.result{
+  font-size: 5rem;
+  color: cadetblue;
+}
+.btn{
+  font-size: 3rem;
+  color: white;
+  background-color: cadetblue;
+  border: 1px solid rgb(62, 157, 160);
+  cursor: pointer;
+  padding: 7px;
+  border-radius: 5px;
+}
+.btn:hover{
+  color: rgb(232, 216, 216);
+  background-color: rgb(1, 112, 116);
+  border: 1px solid rgb(1, 105, 109);
+}
+.pop-up.show{
+ display: flex;
+}
